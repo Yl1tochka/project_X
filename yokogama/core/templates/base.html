@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Yokogama — Суши бар в Альметьевске{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+          emerald: { 600: '#0d9488',
+                      700: '#0f766e'
+          } }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-emerald-600">Yokogama</a>
+      <nav class="hidden md:flex space-x-6">
+        <a href="/menu/" class="hover:text-emerald-600">Меню</a>
+        <a href="/about/" class="hover:text-emerald-600">О нас</a>
+        <a href="/delivery/" class="hover:text-emerald-600">Доставка</a>
+        <a href="/contacts/" class="hover:text-emerald-600">Контакты</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <span class="text-sm"> <!--на потом --> </span>
+        <a href="tel:+79520400333" class="font-semibold text-emerald-600">+7 900 555 35 35</a>
+        <a href="/cart/" class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded">Корзина</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="min-h-screen">
+    {% if messages %}
+      <div class="container mx-auto px-4 py-3">
+        {% for message in messages %}
+          <div class="bg-emerald-100 text-emerald-800 p-3 rounded mb-4">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="bg-gray-50 py-8 mt-12">
+    <div class="container mx-auto px-4 text-center text-gray-600">
+      <p>© 2025 Yokogama. Доставка суши и роллов в Альметьевске.</p>
+    </div>
+  </footer>
+</body>
+</html>
