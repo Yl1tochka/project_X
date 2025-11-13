@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О нас — Yokogama — Суши бар в Альметьевске{% endblock %}
+
+{% block extra_css %}
+<style>
+  .hero-video {
+    object-fit: cover;
+  }
+  .team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  .mission-section {
+    background-color: #f9fafb;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero-секция с видео (стиль CocosBeauty) -->
+<div class="relative h-[400px] overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+  <video autoplay muted loop class="absolute w-full h-full object-cover hero-video">
+    <source src="/static/videos/videodaria.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+  <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center text-white">
+    <h1 class="text-3xl md:text-5xl font-bold">О нас</h1>
+    <p class="mt-4 text-lg max-w-xl">Создано с любовью к суши и качеству</p>
+  </div>
+</div>
+
+<!-- Основной контент -->
+<section class="py-16 container mx-auto px-4">
+  <div class="max-w-4xl mx-auto text-center mb-12">
+    <h2 class="text-3xl font-bold text-emerald-800 mb-6">Дарья Морунова — основательница Yokogama</h2>
+    <p class="text-lg text-gray-700 leading-relaxed">
+      Сегодня «Yokogama» — это не просто суши-бар, а студия, где рождаются авторские рецепты, 
+      тщательно подобранные ингредиенты и настоящая культура японской кухни. Мы не просто продаём блюда — 
+      мы делимся вкусом, который проверен ежедневно: мы сами едим то, что подаём вам.
+    </p>
+  </div>
+
+  <!-- Миссия -->
+  <section class="mission-section py-12 rounded-2xl px-8 md:px-16 text-center mb-16">
+    <h3 class="text-2xl font-bold text-emerald-800 mb-6">Наша миссия</h3>
+    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+      Сделать японскую кухню доступной, свежей и вкусной для каждого жителя Альметьевска. 
+      Мы используем только проверенных поставщиков, работаем с суши-мастерами с опытом более 5 лет 
+      и не экономим на качестве — потому что ваше здоровье и удовольствие важнее.
+    </p>
+  </section>
+
+  <!-- Команда -->
+  <h3 class="text-2xl font-bold text-center mb-10 text-emerald-800">Наша команда</h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="team-card bg-white p-6 rounded-xl shadow-sm text-center">
+      <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <span class="text-3xl font-bold text-gray-500">Д</span>
+      </div>
+      <h4 class="text-xl font-semibold text-emerald-700">Дарья Морунова</h4>
+      <p class="text-gray-600 mt-2">Основательница, креативный директор</p>
+    </div>
+    <div class="team-card bg-white p-6 rounded-xl shadow-sm text-center">
+      <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <span class="text-3xl font-bold text-gray-500">С</span>
+      </div>
+      <h4 class="text-xl font-semibold text-emerald-700">Сергей Иванов</h4>
+      <p class="text-gray-600 mt-2">Суши-мастер, 7 лет в профессии</p>
+    </div>
+    <div class="team-card bg-white p-6 rounded-xl shadow-sm text-center">
+      <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <span class="text-3xl font-bold text-gray-500">А</span>
+      </div>
+      <h4 class="text-xl font-semibold text-emerald-700">Анна Петрова</h4>
+      <p class="text-gray-600 mt-2">Координатор доставки, фанатка роллов</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-black text-white py-8">
+  <div class="container mx-auto px-4 text-center space-y-4">
+    <img src="{% static 'images/logo-footer.png' %}" alt="Логотип Yokogama" class="footer-logo mx-auto">
+    <p class="disclaimer italic">
+      Внешний вид готовых блюд может немного отличаться от представленных в меню изображений*
+    </p>
+    <p class="text-sm text-gray-400">
+      Технический партнёр: <span class="font-semibold">sellkit.cc</span>
+    </p>
+    <p class="text-sm text-gray-500">
+      © 2025 Yokogama. Все права защищены.
+    </p>
+  </div>
+</footer>
+{% endblock %}

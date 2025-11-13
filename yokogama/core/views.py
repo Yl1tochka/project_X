@@ -2,11 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Category, Product
 
-
-# Главная
 def index(request):
     categories = Category.objects.all()
-    return render(request, 'index.html', {'categories': categories})
+    # Добавим список категорий вручную, как на inyan.ru
+    menu_categories = [
+        "Сеты", "Сложные роллы", "Горячие роллы", "Запеченные роллы", "Классические роллы",
+        "Суши, гунканы", "Пицца (32 см)", "Бургеры", "Салаты", "Супы", "Мясные и рыбные блюда",
+        "Паста, вок", "Закуски", "Гарниры", "Детское меню", "Кофе", "Чаи", "Милкшейки",
+        "Напитки", "Смузи и детоксы"
+    ]
+    return render(request, 'index.html', {'categories': categories, 'menu_categories': menu_categories})
 
 
 # Меню
@@ -40,10 +45,9 @@ def cart_detail(request):
             'product': product,
             'quantity': quantity,
             'subtotal': subtotal,
-            'image': image,
         })
         total += subtotal
-    return render(request, 'cart/detail.html', {'cart_items': cart_items, 'total': total, 'image': image})
+    return render(request, 'cart/detail.html', {'cart_items': cart_items, 'total': total})
 
 
 def cart_add(request, product_id):

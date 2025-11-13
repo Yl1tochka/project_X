@@ -1,18 +1,118 @@
 {% extends 'base.html' %}
+{% load static %}  <!-- Добавьте эту строку -->
+
+{% block extra_css %}
+<!-- Подключение Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  .hero-video {
+    object-fit: cover;
+  }
+  .map-container iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+  }
+  .footer-logo {
+    max-width: 150px;
+  }
+  .disclaimer {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="relative h-[500px] overflow-hidden">
+
+<!-- 1. Hero-секция с видео (стиль CocosBeauty) -->
+<div class="relative h-[600px] overflow-hidden">
   <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
-  <div class="absolute inset-0 bg-emerald-200 flex items-center justify-center text-emerald-800 font-bold">
+  <video autoplay muted loop class="absolute w-full h-full object-cover hero-video">
+    <source src="/static/videos/hero.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
 
-  </div>
-
-  <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center text-white">
-    <h1 class="text-4xl md:text-6xl font-bold max-w-2xl">Свежие суши и горячие роллы</h1>
-    <p class="mt-4 text-lg max-w-xl">Доставка любимых блюд прямо к вашему столу в Альметьевске.</p>
-    <a href="/menu/" class="mt-6 inline-block bg-emerald-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-emerald-700 transition w-fit">
-      Посмотреть менюю
-    </a>
+  <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center text-white text-center md:text-left">
+    <h1 class="text-4xl md:text-6xl font-bold max-w-3xl leading-tight">
+      Yokogama — Суши бар в Альметьевске
+    </h1>
+    <p class="mt-4 text-lg max-w-xl">
+      Только свежие ингредиенты, авторские рецепты и быстрая доставка!
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+      <a href="/menu/" class="bg-emerald-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-emerald-700 transition">
+        Заказать онлайн
+      </a>
+      <a href="/delivery/" class="bg-white text-emerald-700 px-6 py-3 rounded-full font-semibold hover:bg-emerald-50 transition">
+        Условия доставки
+      </a>
+    </div>
   </div>
 </div>
+
+
+<!-- 3. Кнопки категорий меню (как на inyan.ru / rocknrolly.ru) -->
+<section class="py-12">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Меню</h2>
+    <div class="flex flex-wrap justify-center gap-3">
+      {% for cat in menu_categories %}
+        <a href="/menu/#{{ cat|slugify }}"
+           class="px-5 py-2 bg-white rounded-full shadow text-emerald-700 font-medium hover:bg-emerald-50 transition transform hover:scale-105">
+          {{ cat }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- 5. Нижняя часть с контактами (как на inyan.ru) -->
+<section class="py-12 bg-emerald-700 text-white">
+  <div class="container mx-auto px-4 text-center">
+    <h3 class="text-2xl font-bold mb-4">Yokogama — Суши бар в Альметьевске</h3>
+    <p class="text-lg mb-2">📞 <a href="tel:+79520400333">+7 (952) 040-03-33</a></p>
+    <p class="text-lg mb-2">🕒 Работаем: 10:00 – 23:59</p>
+    <p class="text-gray-300">Доставка по Альметьевску</p>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  });
+</script>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-black text-white py-8">
+  <div class="container mx-auto px-4 text-center space-y-4">
+    <!-- Логотип (как на rocknrolly.ru) -->
+    <img src="{% static 'images/logo-footer.png' %}" alt="Логотип Yokogama" class="footer-logo mx-auto">
+
+    <!-- Уведомление о внешнем виде блюд -->
+    <p class="disclaimer italic">
+      Внешний вид готовых блюд может немного отличаться от представленных в меню изображений*
+    </p>
+
+    <!-- Технический партнер -->
+    <p class="text-sm text-gray-400">
+      Технический партнёр: <span class="font-semibold">sellkit.cc</span>
+    </p>
+
+    <!-- Копирайт -->
+    <p class="text-sm text-gray-500">
+      © 2025 Yokogama. Все права защищены.
+    </p>
+  </div>
+</footer>
 {% endblock %}
